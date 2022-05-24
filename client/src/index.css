@@ -1,0 +1,41 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "~react-image-gallery/styles/css/image-gallery.css";
+
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+.hero-image {
+  filter: brightness(40%);
+}
+
+.hero-text {
+  left: 10%;
+  right: 50%;
+}
+
+.offer-img {
+  height: 350px;
+  object-fit: cover;
+  object-position: bottom;
+}
+
+svg {
+  display: inline-block;
+}
+
+img {
+  object-fit: cover;
+}
