@@ -6,6 +6,7 @@ import Rooms from './pages/Rooms';
 import RoomDetail from './pages/RoomDetail';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
+import Profile from './pages/Profile';
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Route path='/rooms/:id' element={<RoomDetail />} />
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
+        <Route path='/profile' element={<Profile />} />
         <Route path='/admin/createRoom' element={ <CreateRoom />} />
       </Routes>
     </div>

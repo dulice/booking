@@ -15,32 +15,26 @@ router.post('/signup', expressAsyncHandler(async (req, res) => {
         password: hashPassword
     });
     await newUser.save();
-    res.status(200).json({
-        _id: user._id,
-        name: req.body.name,
-        email: req.body.email,
-        isAdmin: req.body.isAdmin,
-        token: generateToken(user)
-    });
+    res.status(200).json(newUser);
 }));
 
 router.post('/signin', expressAsyncHandler (async (req, res) => {
     const user = await User.findOne({email: req.body.email});
-    if(!user) return res.status(400).json("User doesn't exist!");
+    if(!user) return res.status(400).json({message: "User doesn't exist!"});
 
     const validPassword = await bcrypt.compare(req.body.password, user.password);
     if(!validPassword) return res.status(400).json("Incorrect Password");
 
     res.status(200).json({
-        name: req.body.name,
-        email: req.body.email,
-        isAdmin: req.body.isAdmin,
+        name: user.name,
+        email: user.email,
+        isAdmin: user.isAdmin,
         token: generateToken(user)
     });
 }));
 
-router.put('/:id', isAuth, expressAsyncHandler( async (req, res) => {
-    const user = await User.findById(req.params.id);
+router.put('/profile', isAuth, expressAsyncHandler( async (req, res) => {
+    const user = await User.findById(req.user._id)
     if(user) {
         const salt = await bcrypt.genSalt(10);
         const hashPassword = await bcrypt.hash(req.body.password, salt);
@@ -56,7 +50,7 @@ router.put('/:id', isAuth, expressAsyncHandler( async (req, res) => {
             token: generateToken(updateUser)
         })
     } else {
-        res.status(400).json("User not Found!");
+        res.status(400).json({message: "User not Found!"});
     }
 }))
 

@@ -2,6 +2,8 @@ import React, { useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify';
 import axios from 'axios'
 import Room from '../components/Room';
+import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 
 const Reducer = (state, action) => {
   switch (action.type) {
@@ -37,10 +39,20 @@ const Rooms = () => {
       }
     }
     fetchRooms();
-  },[]);
+  },[error]);
 
   return (
     <div className="max-w-5xl mx-auto my-10">
+      <Helmet>
+        <title>Rooms</title>
+      </Helmet>
+      <nav class="bg-grey-light rounded-md w-full my-5">
+            <ol class="list-reset flex">
+                <li><Link to='/' class="text-blue-600 hover:text-blue-700">Home</Link></li>
+                <li><span class="text-gray-500 mx-2">/</span></li>
+                <li class="text-gray-500">Rooms</li>
+            </ol>
+        </nav>
       <div className='flex justify-between items-center mb-5'>
         <p className='text-3xl capitalize'>Rooms and Suits</p>
       </div>

@@ -6,32 +6,32 @@ import { Store } from '../context/Store';
 
 const Signup = () => {
     const navigate = useNavigate();
-    const [{dispatch: ctxDispatch}] = useContext(Store);
+    const {dispatch: ctxDispatch} = useContext(Store);
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         if(password !== confirmPassword) return toast.error("Password do not match!");
         try {
-            const {data} = await axios.post('/api/signup', {
+            const {data} = await axios.post('/api/users/signup', {
                 name,
                 email,
                 password
             });
+            console.log(data);
             ctxDispatch({type: "USER_SINGIN", payload: data});
-            localStorage.setItem('userInfo', JSON.stringify(data));
             navigate('/signin');
         } catch (err) {
-            toast.error(err.message);
+            toast.error(err.response.data);
         }
     }
 
   return (
-    <div className='flex justify-center h-screen items-center'>
-        <div className='border border-gray-300 rounded-md p-5 shadow-sm'>
+    <div className='flex justify-center h-screen items-center bg-no-repeat bg-bottom bg-cover' style={{background: 'linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url(https://s7d2.scene7.com/is/image/ritzcarlton/Arts%20hotel%20-%20april%202018%2002?$XlargeViewport100pct$)'}}>
+        <div className='border border-gray-300 rounded-md p-5 shadow-sm bg-white'>
             <p className='font-bold text-3xl text-blue-600 mb-5'>SIGN UP</p>
             <form onSubmit={handleSubmit}>
                 <label htmlFor="name" className='mt-5'>Name:</label>

@@ -1,28 +1,83 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
+import axios from 'axios'
+import { toast } from 'react-toastify'
+import { Store } from '../context/Store'
+import { Link, useNavigate } from 'react-router-dom'
+import { Helmet } from 'react-helmet-async'
 
 const CreateRoom = () => {
+  const navigate = useNavigate();
+  const {state} = useContext(Store);
+  const { userInfo } = state;
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [price, setPrice] = useState('');
-    const [image, setImage] = useState('');
+    const [insideRoomImage, setInsideRoomImage] = useState('');
+    const [outsideRoomImage, setOutsideRoomImage] = useState('');
+    const [viewImage, setViewImage] = useState('');
     const [avaliblePerson, setAvaliblePerson] = useState('');
     const [area, setArea] = useState('');
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
+        try {
+          await axios.post('/api/rooms', {
+            name,
+            description,
+            price,
+            avaliblePerson,
+            area,
+            image: [insideRoomImage, outsideRoomImage, viewImage]
+          }, {
+            headers: {
+              authorization: `Bearer ${userInfo.token}`
+            }
+          });
+          toast.success("Post Successfully.");
+          navigate('/');
+        } catch (err) {
+          toast.error(err.response.data);
+        }
     }
+
   return (
     <div className='max-w-5xl mx-auto'>
+      <Helmet>
+        <title>CreateRoom</title>
+      </Helmet>
+      <nav class="bg-grey-light rounded-md w-full my-5">
+        <ol class="list-reset flex">
+            <li><Link to='/' class="text-blue-600 hover:text-blue-700">Home</Link></li>
+            <li><span class="text-gray-500 mx-2">/</span></li>
+            <li class="text-gray-500">CreateRoom</li>
+        </ol>
+      </nav>
         <div className="m-3">
         <h1 className="font-bold text-3xl text-blue-700">Room</h1>
         <form onSubmit={handleSubmit}>
 
           <div className="grid grid-cols-6 gap-4">
             <div className="col-span-6 sm:col-span-6">
-              <label htmlFor="image" className='block text-grap-700 mt-3'>Image:</label>
+              <label htmlFor="image" className='block text-grap-700 mt-3'>Inside Room Image:</label>
               <input 
-                value={image}
-                onChange={(e) => setImage(e.target.value)}
+                value={insideRoomImage}
+                onChange={(e) => setInsideRoomImage(e.target.value)}
+                type="text" className="p-2 rounded-md sm:text-sm w-full border border-blue-700 outline-blue-600" id="image" placeholder='Put you image url' />
+            </div>
+
+            <div className="col-span-6 sm:col-span-6">
+              <label htmlFor="image" className='block text-grap-700 mt-3'>Outside Room Image:</label>
+              <input 
+                value={outsideRoomImage}
+                onChange={(e) => setOutsideRoomImage(e.target.value)}
+                type="text" className="p-2 rounded-md sm:text-sm w-full border border-blue-700 outline-blue-600" id="image" placeholder='Put you image url' />
+            </div>
+
+            <div className="col-span-6 sm:col-span-6">
+              <label htmlFor="image" className='block text-grap-700 mt-3'>View Image:</label>
+              <input 
+                value={viewImage}
+                onChange={(e) => setViewImage(e.target.value)}
                 type="text" className="p-2 rounded-md sm:text-sm w-full border border-blue-700 outline-blue-600" id="image" placeholder='Put you image url' />
             </div>
 
@@ -35,15 +90,6 @@ const CreateRoom = () => {
                 className="p-2 rounded-md sm:text-sm w-full border border-blue-700 outline-blue-600" 
                 id="name"
               />
-            </div>
-
-            <div className="col-span-6 sm:col-span-3">
-              <label htmlFor="description" className='block text-grap-700 mt-3'>Description:</label>
-              <input 
-                value={description}
-                onChange={(e) => setDescription(e.target.value)}
-                type="text" 
-                className="p-2 rounded-md sm:text-sm w-full border border-blue-700 outline-blue-600" id="name" />
             </div>
 
             <div className="col-span-6 sm:col-span-3">

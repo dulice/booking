@@ -1,16 +1,19 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import axios from 'axios';
+import React, { useContext, useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import { Store } from '../context/Store';
 
 const Signin = () => {
     const navigate = useNavigate();
-    const [{dispatch: ctxDispatch}] = useContext(Store);
+    const {dispatch: ctxDispatch} = useContext(Store);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const {data} = await axios.post('/api/signin', {
+            const {data} = await axios.post('/api/users/signin', {
                 email,
                 password
             });
@@ -24,6 +27,7 @@ const Signin = () => {
 
   return (
     <div className='flex justify-center h-screen items-center'>
+        
         <div className='border border-gray-300 rounded-md p-5 shadow-sm'>
             <p className='font-bold text-3xl text-blue-600 mb-5'>SIGN IN</p>
             <form onSubmit={handleSubmit}>

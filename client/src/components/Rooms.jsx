@@ -1,7 +1,6 @@
 import React, { useEffect, useReducer } from 'react'
 import { toast } from 'react-toastify';
 import axios from 'axios'
-import Rating from './Rating';
 import Room from './Room';
 import { Link } from 'react-router-dom';
 
@@ -39,7 +38,7 @@ const Rooms = () => {
       }
     }
     fetchRooms();
-  },[]);
+  },[error]);
 
   return (
     <div className="max-w-5xl mx-auto my-20">
@@ -53,7 +52,7 @@ const Rooms = () => {
         {loading ? <div>Loading...</div>
         :       
         <div className="grid grid-cols-12 gap-6 ">
-            {rooms.slice(0,3)?.map(room => (
+            {rooms.slice(rooms.length-3,rooms.length)?.map(room => (
               <div className="col-span-4 shadow-lg border border-slate-300 rounded-md p-3" key={room._id}>
                 <Room room={room} />
               </div>

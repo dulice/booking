@@ -1,18 +1,16 @@
 const jwt = require('jsonwebtoken');
 
 const generateToken = (user) => {
-    return (
-        jwt.sign({
-            _id: user._id,
-            name: user.name,
-            email: user.email,
-            isAdmin: user.isAdmin
-        },
-        process.env.SECRET_TOKEN,
-        {
-            expiresIn: '3d'
-        })
-    )
+    return jwt.sign({
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                isAdmin: user.isAdmin
+            },
+            process.env.SECRET_TOKEN,
+            {
+                expiresIn: '3d'
+            });
 }
 
 const isAuth = (req, res, next) => {
@@ -23,7 +21,7 @@ const isAuth = (req, res, next) => {
             if(error) {
                 res.status(400).json({message: "invalid token"});
             } else {
-                req.body = decode
+                req.user = decode
                 next();
             }
         })

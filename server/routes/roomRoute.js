@@ -51,10 +51,10 @@ router.post('/:id/review', isAuth, expressAsyncHandler (async (req, res) => {
         const alreadyReview = room.reviews.find(r => r.user.toString() === req.user._id.toString());
         if(alreadyReview) return res.status(200).json("Already Review!");
         const review = {
-            name: req.user.name,
             rating: req.body.rating,
             comment: req.body.comment,
-            _id: user._id
+            user: req.user._id,
+            name: req.user.name,
         };
         room.reviews.push(review);
         room.numReviews = room.reviews.length;

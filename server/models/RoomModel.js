@@ -1,4 +1,24 @@
 const mongoose = require('mongoose');
+
+const reviewSchema = new mongoose.Schema({
+    user: {
+        type: mongoose.Schema.Types.ObjectId,
+        require: true,
+        ref: "User"
+    },
+    name: {
+        type: String,
+    },
+    comment: {
+        type: String,
+        required: true
+    },
+    rating: {
+        type: Number,
+        default: 0
+    }
+},{timestamps: true});
+
 const roomSchema = new mongoose.Schema({
     name: { type: String, required: true},
     description: { type: String, required: true},
@@ -8,16 +28,7 @@ const roomSchema = new mongoose.Schema({
     image: [{type: String}],
     avaliblePerson: {type: String, required: true},
     area: { type: Number, required: true},
-    Book: { type: Boolean, default: false},
-    reviews: [{
-        user: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: "User",
-            required: true
-        },
-        rating: { type: Number, default: 0},
-        comment: { type: String, required: true}
-    }]
+    reviews: [reviewSchema]
 }, { timestamps: true});
 
 const Room = mongoose.model('Room', roomSchema);

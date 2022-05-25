@@ -5,6 +5,7 @@ const mongoose = require('mongoose');
 
 const userRoute = require('./routes/userRoute');
 const roomRoute = require('./routes/roomRoute');
+const bookRoute = require('./routes/BookRoute');
 
 const app = express();
 app.use(express.json());
@@ -25,3 +26,8 @@ mongoose.connect(process.env.CONNECT_DB)
 
 app.use('/api/rooms', roomRoute);
 app.use('/api/users', userRoute);
+app.use('/api/books', bookRoute);
+
+app.use((err, req, res, next) => {
+    res.status(500).json({message: err.message});
+})
