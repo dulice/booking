@@ -1,11 +1,10 @@
 import axios from 'axios';
 import React, { useContext, useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify';
 import { Store } from '../context/Store';
 
 const Signin = () => {
-    const navigate = useNavigate();
     const {dispatch: ctxDispatch} = useContext(Store);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -19,7 +18,7 @@ const Signin = () => {
             });
             ctxDispatch({type: "USER_SINGIN", payload: data});
             localStorage.setItem('userInfo', JSON.stringify(data));
-            navigate('/');
+            window.location.replace('/');
         } catch (err) {
             toast.error(err.message);
         }

@@ -42,7 +42,7 @@ const Rooms = () => {
   },[error]);
 
   return (
-    <div className="max-w-5xl mx-auto my-10">
+    <div className="max-w-5xl mx-auto my-10 px-2">
       <Helmet>
         <title>Rooms</title>
       </Helmet>

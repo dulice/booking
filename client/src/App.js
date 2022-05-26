@@ -10,7 +10,7 @@ import Profile from './pages/Profile';
 
 function App() {
   return (
-    <div className='px-2'>
+    <div>
       <ToastContainer position="bottom-center" limit={1} />
       <Routes>
         <Route path='/' element={<Home/>} />
