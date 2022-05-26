@@ -8,6 +8,7 @@ import Reviews from '../components/Reviews';
 import { Store } from '../context/Store';
 import { BiDollarCircle } from 'react-icons/bi'
 import { Helmet } from 'react-helmet-async';
+import FsLightbox from 'fslightbox-react';
 
 const Reducer = (state, action) => {
     switch (action.type) {
@@ -19,6 +20,15 @@ const Reducer = (state, action) => {
   
       case "FETCH_FAIL":
           return { ...state, loading: false, error: action.payload};
+
+      case "BOOK_REQUEST":
+        return { ...state, loading: true};
+  
+      case "BOOK_SUCCESS":
+        return { ...state, loadingBook: false, book: action.payload}
+  
+      case "BOOK_FAIL":
+          return { ...state, loadingBook: false, error: action.payload};
   
       default:
         return state;
@@ -33,6 +43,7 @@ const RoomDetail = () => {
   const [checkin, setCheckin] = useState(new Date());
   const [checkout, setCheckout] = useState(new Date());
 
+  const [toggler, setToggler] = useState(false);
     const { id } = useParams();
     const [{loading, error, room}, dispatch] = useReducer(Reducer, {
         loading: true,
@@ -54,6 +65,21 @@ const RoomDetail = () => {
         }
         fetchRooms();        
       },[id, dispatch, error]);
+
+      useEffect(() => {
+        const fetchData = async () => {
+          dispatch({type: "BOOK_REQUEST"});
+          try{
+            const { data } = await axios.get('/api/books');
+            const findRoom = data.find(room => room.bookRoom.roomId === id);
+            dispatch({type: "BOOK_SUCCESS", payload: findRoom});
+          } catch (err) {
+            dispatch({type: "BOOK_FAIL", payload: err.response.data});
+            toast.error(error);
+          }
+        }
+        fetchData();
+      },[error, id])
 
       const handleBook = async (e) => {
         e.preventDefault();
@@ -83,24 +109,32 @@ const RoomDetail = () => {
       <Helmet>
         <title>Room Detail</title>
       </Helmet>
-      <nav class="bg-grey-light rounded-md w-full my-5">
-        <ol class="list-reset flex">
-            <li><Link to='/' class="text-blue-600 hover:text-blue-700">Home</Link></li>
-            <li><span class="text-gray-500 mx-2">/</span></li>
-            <li><Link to='/rooms' class="text-blue-600 hover:text-blue-700">Rooms</Link></li>
-            <li><span class="text-gray-500 mx-2">/</span></li>
-            <li class="text-gray-500">Details</li>
+      <nav className="bg-grey-light rounded-md w-full my-5">
+        <ol className="list-reset flex">
+            <li><Link to='/' className="text-blue-600 hover:text-blue-700">Home</Link></li>
+            <li><span className="text-gray-500 mx-2">/</span></li>
+            <li><Link to='/rooms' className="text-blue-600 hover:text-blue-700">Rooms</Link></li>
+            <li><span className="text-gray-500 mx-2">/</span></li>
+            <li className="text-gray-500">Details</li>
         </ol>
       </nav>
         {loading ? <div>Loading...</div>
         :
         <div>
           <p className='font-bold text-2xl my-5'>{room.name}</p>
-          <div className="grid grid-rows-4 grid-flow-col gap-6">
-            <img src={room.image[0]} alt="" className="row-span-2 rounded-md h-full" />
-            <img src={room.image[1]} alt="" className="row-span-2 rounded-md h-full" />
-            <img src={room.image[2]} alt="" className="row-span-4 col-span-3 rounded-md h-full" />
-          </div>
+          
+          <button onClick={() => setToggler(!toggler)}>
+            <div className="grid grid-rows-4 grid-flow-col gap-6">
+              <img src={room.image[0]} alt="" className="row-span-2 rounded-md h-full" />
+              <img src={room.image[1]} alt="" className="row-span-2 rounded-md h-full" />
+              <img src={room.image[2]} alt="" className="row-span-4 col-span-3 rounded-md h-full" />
+            </div>
+          </button>
+          <FsLightbox
+          toggler={toggler}
+          sources={[room.image[0],room.image[1],room.image[2]]}
+          />
+
           <ul className='flex justify-between my-5'>
             <li className='text-center'>
               <CgHome className='text-2xl'/>

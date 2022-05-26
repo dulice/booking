@@ -2,6 +2,7 @@ const express = require('express');
 const dotenv = require('dotenv');
 const cors = require('cors');
 const mongoose = require('mongoose');
+const path = require('path');
 
 const userRoute = require('./routes/userRoute');
 const roomRoute = require('./routes/roomRoute');
@@ -27,6 +28,12 @@ mongoose.connect(process.env.CONNECT_DB)
 app.use('/api/rooms', roomRoute);
 app.use('/api/users', userRoute);
 app.use('/api/books', bookRoute);
+
+const __variableOfChoice = path.resolve()
+app.use(express.static(path.join(__variableOfChoice, '/client/build')));
+app.get("*", (req,res) => {
+    res.sendFile(path.join(__variableOfChoice, '/client/build/index.html'));
+})
 
 app.use((err, req, res, next) => {
     res.status(500).json({message: err.message});

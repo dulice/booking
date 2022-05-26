@@ -19,6 +19,15 @@ router.post('/', isAuth, expressAsyncHandler (async (req, res) => {
     res.status(200).json(saveBook);
 }));
 
+router.get('/', expressAsyncHandler (async (req, res) => {
+    const book = await Book.find();
+    if(book) {
+        res.status(200).json(book);
+    } else {
+        res.status(500).json({message: "Room not found!"});
+    }
+}))
+
 router.get('/:id', expressAsyncHandler (async (req, res) => {
     const book = await Book.findById(req.params.id);
     if(book) {

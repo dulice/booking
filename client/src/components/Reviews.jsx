@@ -77,7 +77,7 @@ const Reviews = () => {
         {reviews.length < 1 ? <p className='text-red-600'>There is no reviews yet</p>
         : reviews.map(rev => (
           <div key={rev._id} className="mb-3">
-            <strong>{rev.name}</strong><span className='text-gray-600'>{'   '}( {moment(rev.createdAt).toNow()} )</span>
+            <strong>{rev.name}</strong><span className='text-gray-600'>{'   '}( {moment(rev.createdAt).fromNow()} )</span>
             <Rating rating={rev.rating} className="text-red-600"/>
             <p>{rev.comment}</p>
           </div>

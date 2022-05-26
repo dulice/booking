@@ -41,6 +41,6 @@ img {
   object-fit: cover;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  filter: invert(100%);
+.react-date-picker__clear-button.react-date-picker__button {
+  display: none;
 }

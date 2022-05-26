@@ -45,11 +45,11 @@ const CreateRoom = () => {
       <Helmet>
         <title>CreateRoom</title>
       </Helmet>
-      <nav class="bg-grey-light rounded-md w-full my-5">
-        <ol class="list-reset flex">
-            <li><Link to='/' class="text-blue-600 hover:text-blue-700">Home</Link></li>
-            <li><span class="text-gray-500 mx-2">/</span></li>
-            <li class="text-gray-500">CreateRoom</li>
+      <nav className="bg-grey-light rounded-md w-full my-5">
+        <ol className="list-reset flex">
+            <li><Link to='/' className="text-blue-600 hover:text-blue-700">Home</Link></li>
+            <li><span className="text-gray-500 mx-2">/</span></li>
+            <li className="text-gray-500">CreateRoom</li>
         </ol>
       </nav>
         <div className="m-3">

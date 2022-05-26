@@ -1,9 +1,4 @@
 import React from 'react'
-import { CgGym } from 'react-icons/cg'
-import { IoFastFoodSharp } from 'react-icons/io5'
-import { MdSpa, MdPool, MdHeadsetMic } from 'react-icons/md'
-import { FaUmbrellaBeach } from 'react-icons/fa'
-import { Link } from 'react-router-dom'
 
 const Testimonial = () => {
   return (
