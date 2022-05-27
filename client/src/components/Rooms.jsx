@@ -53,7 +53,7 @@ const Rooms = () => {
         :       
         <div className="grid grid-cols-12 gap-6 ">
             {rooms.slice(rooms.length-3,rooms.length)?.map(room => (
-              <div className="col-span-4 shadow-lg border border-slate-300 rounded-md p-3" key={room._id}>
+              <div className="col-span-12 sm:col-span-4 shadow-lg border border-slate-300 rounded-md p-3" key={room._id}>
                 <Room room={room} />
               </div>
             ))}
