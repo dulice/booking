@@ -40,7 +40,7 @@ export default function Hero() {
   
   return (
       <div className='relative'>
-        <div className="flex justify-between max-w-5xl mx-auto absolute z-10 text-white left-0 right-0 mt-3">
+        <div className="flex justify-between max-w-6xl mx-auto px-2 sm:px-6 lg-px-8 absolute z-10 text-white left-0 right-0 mt-3">
           <p className="font-['Pacifico'] text-2xl font-bold">Grace</p>
           <div>
             {userInfo ?
@@ -129,16 +129,15 @@ export default function Hero() {
           className="">
               {images.map((image,index) => {
                   return (
-                      <SplideSlide key={index}>
-                          <img src={image.original} alt=""/>
+                      <SplideSlide key={index} style={{backgroundImage: `url(${image.original})`}} className="bg-no-repeat bg-center bg-cover">
                       </SplideSlide>                     
                   )
               })}
           </Splide>
         </div>
-        <div className="inset-y-16 sm:inset-y-24 lg:inset-y-1/4 mt-5 absolute inset-x-10 sm:inset-x-2/6 hero-text text-black sm:text-white">
+        <div className="inset-y-1/4 absolute left-6 right-6 sm:right-2/4 hero-text text-white">
             <h3 className='text-xl sm:text-3xl font-bold text-white mb-5'>Welcome To Hotel</h3>
-            <p className='text-gray-400 hidden sm:block'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, provident. Dolorum qui est explicabo possimus, dignissimos, accusantium beatae illum recusandae soluta, veniam minus ea! Impedit id consectetur eaque accusantium hic?</p>
+            <p className='text-gray-400'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, provident. Dolorum qui est explicabo possimus, dignissimos, accusantium beatae illum recusandae soluta, veniam minus ea! Impedit id consectetur eaque accusantium hic?</p>
             <Link to='/rooms'>
               <button className='text-white rounded-full px-3 py-2 border border-white mt-5'>Book Now</button>
             </Link>

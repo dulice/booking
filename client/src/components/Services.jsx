@@ -7,8 +7,7 @@ import { Link } from 'react-router-dom'
 
 const Services = () => {
   return (
-    <div className='mt-10 relative'>
-      <Link to='/admin/createRoom'>Create</Link>
+    <div className='mt-20 relative'>
         <img src="https://d1el5jddkxvjyd.cloudfront.net/viceroyhotelsandresorts.com-2109743334/cms/cache/v2/5f3edc7b9b603.jpg/1920x864/fit/80/299233eaf8eb42561189da7ebbe252a8.jpg" alt="" className='offer-img w-full' />
         <div className='max-w-md bg-blue-500 p-10 rounded-sm absolute right-20 -inset-y-10 text-white leading-8 '>
             <div className="w-12 h-1 bg-white rounded-full my-3"></div>

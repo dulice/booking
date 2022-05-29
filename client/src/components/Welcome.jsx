@@ -4,7 +4,7 @@ import InfoImg from '../images/info-img.png'
 
 const Welcome = () => {
   return (
-    <div className="max-w-5xl mx-auto">
+    <div className="max-w-5xl mx-auto px-2 mb-10">
         <div className="grid grid-cols-12 gap-6">
             <div className="col-span-12 sm:col-span-6">
                 <img src={InfoImg} alt="" />

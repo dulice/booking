@@ -22,9 +22,10 @@ code {
   filter: brightness(40%);
 }
 
-.hero-text {
-  left: 10%;
-  right: 50%;
+@media (min-width: 678px) {
+  .hero-text {
+    left: 12%;
+  }
 }
 
 .offer-img {
