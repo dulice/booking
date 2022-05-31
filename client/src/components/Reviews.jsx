@@ -53,7 +53,7 @@ const Reviews = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`http://localhost:5000/api/rooms/${id}/review`, {
+      await axios.post(`/api/rooms/${id}/review`, {
         rating,
         comment
       }, {
