@@ -2,7 +2,6 @@ const { isAuth } = require("../utlis");
 const expressAsyncHandler = require("express-async-handler");
 const router = require("express").Router();
 const Book = require("../models/BookModel");
-// const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 const stripe = require("stripe")(process.env.STRIPE_API_KEY);
 
 router.post(

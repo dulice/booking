@@ -1,5 +1,7 @@
-const express = require('express');
 const dotenv = require('dotenv');
+dotenv.config();
+
+const express = require('express');
 const cors = require('cors');
 const mongoose = require('mongoose');
 const path = require('path');
@@ -12,8 +14,6 @@ const app = express();
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cors());
-
-dotenv.config();
 
 const port = process.env.PORT || 5000
 mongoose.connect(process.env.CONNECT_DB)

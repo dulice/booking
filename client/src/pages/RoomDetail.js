@@ -131,7 +131,7 @@ const RoomDetail = () => {
           <p className="font-bold text-2xl my-5">{room.name}</p>
 
           <button onClick={() => setToggler(!toggler)}>
-            <div className="grid grid-rows-4 grid-flow-col gap-6">
+            <div className="grid grid-rows-4 grid-flow-col gap-1 lg:gap-4">
               <img
                 src={room.image[0]}
                 alt=""
@@ -153,37 +153,39 @@ const RoomDetail = () => {
             toggler={toggler}
             sources={[room.image[0], room.image[1], room.image[2]]}
           />
-          <ul className="flex justify-between my-5">
-            <li className="text-center">
+          <ul className="grid grid-cols-3 sm:grid-cols-5 gap-1">
+            <li className="text-center mt-5">
               <CgHome className="text-2xl" />
               <p>Home</p>
             </li>
-            <li className="text-center">
+            <li className="text-center mt-5">
               <BiDollarCircle className="text-2xl" />
               <p>${room.price} per night</p>
             </li>
-            <li className="text-center">
+            <li className="text-center mt-5">
               <p className="font-bold">
                 {room.area ? room.area : 110} m<sup>2</sup>
               </p>
               <p>Size</p>
             </li>
-            <li className="text-center">
+            <li className="text-center mt-5">
               <CgSmartHomeCooker className="text-2xl" />
               <p>Kitchen</p>
             </li>
-            <li className="text-center">
+            <li className="text-center mt-5">
               <CgSmartHomeWashMachine className="text-2xl" />
               <p>Washing Machine</p>
             </li>
           </ul>
-          <p className="font-bold text-2xl">{room.name}</p>
-          <p className="mb-5">{room.description}</p>
+          <div className="my-5 border-b-2">
+            <p className="font-bold text-2xl">{room.name}</p>
+            <p className="mb-5">{room.description}</p>
+          </div>
           <p className="font-bold">Most Popular Faciliites</p>
-          <ul className="flex">
+          <ul className="grid grid-cols-3 sm:grid-cols-5">
             {roomFacilites.map((el) => (
               <li key={el.id}>
-                <el.icon className="text-green-600 text-2xl ml-5 mr-1" />
+                <el.icon className="text-green-600 text-2xl ml-5 mr-1 block sm:inline-block" />
                 <span>{el.name}</span>
               </li>
             ))}

@@ -26,7 +26,7 @@ const Payment = () => {
 
   const handlePay = async (e) => {
     e.preventDefault();
-    await stripe
+    clientSecret && await stripe
       .confirmCardPayment(clientSecret, {
         payment_method: {
           card: elements.getElement(CardElement),
