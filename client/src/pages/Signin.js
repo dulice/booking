@@ -50,12 +50,16 @@ const Signin = () => {
 
                 <button 
                 type='submit'
-                className='my-5 px-3 py-2 rounded-full text-white bg-[#ba936f] hover:bg-[#ba936f]/90 active:bg-[#ba936f]/80 block'>SING IN</button>
+                className='my-5 px-3 py-2 rounded-full text-white bg-[#ba936f] hover:bg-[#ba936f]/90 active:bg-[#ba936f]/80 block'>SIGN IN</button>
                 <p>
                     Don't have an account?
                     <Link to='/signup' className='text-blue-500'>Sign up</Link>
                 </p>
             </form>
+            <div className='mt-5 text-gray-500'>
+                <p>email: john@gmail.com</p>
+                <p>password: 123456</p>
+            </div>
         </div>
     </div>
   )
