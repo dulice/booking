@@ -39,7 +39,7 @@ const Reviews = () => {
     const fetchReview = async () => {
       dispatch({type: "FETCH_REQUEST"});
       try {
-        const { data } = await axios.get(`/api/rooms/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/rooms/${id}`);
         // console.log(data.reviews);
         dispatch({type: "FETCH_SUCCESS", payload: data.reviews});
       } catch (err) {
@@ -53,7 +53,7 @@ const Reviews = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`/api/rooms/${id}/review`, {
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/rooms/${id}/review`, {
         rating,
         comment
       }, {

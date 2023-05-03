@@ -38,7 +38,7 @@ const Profile = () => {
         e.preventDefault();
         dispatch({type: "FETCH_REQUIEST"});
         try{
-            const { data } = await axios.put(`/api/users/profile`, {
+            const { data } = await axios.put(`${process.env.REACT_APP_API_URL}/api/users/profile`, {
                 name,
                 email,
                 password

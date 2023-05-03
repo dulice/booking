@@ -21,7 +21,7 @@ const CreateRoom = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-          await axios.post('/api/rooms', {
+          await axios.post(`${process.env.REACT_APP_API_URL}/api/rooms`, {
             name,
             description,
             price,

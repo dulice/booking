@@ -29,7 +29,7 @@ const Rooms = () => {
     const fetchRooms = async () => {
       dispatch({type: "FETCH_REQUEST"});
       try{
-        const { data } = await  axios.get('/api/rooms');
+        const { data } = await  axios.get(`${process.env.REACT_APP_API_URL}/api/rooms`);
         dispatch({type: "FETCH_SUCCESS", payload: data});
         // console.log(data);
       } catch (err) {

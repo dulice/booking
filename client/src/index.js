@@ -1,12 +1,12 @@
 import React, { Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
-// import App from './App';
 import 'react-toastify/dist/ReactToastify.css';
 import { BrowserRouter } from 'react-router-dom';
 import { StoreProvider } from './context/Store';
 import { HelmetProvider } from 'react-helmet-async'
 import Loading from './components/Loading';
+import { AmountProvider } from './context/Amount';
 
 const App = React.lazy(() => import('./App'));
 
@@ -17,9 +17,11 @@ root.render(
     <Suspense fallback={<Loading />}>
     <HelmetProvider>
       <StoreProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <AmountProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </AmountProvider>
       </StoreProvider>
     </HelmetProvider>
     </Suspense>

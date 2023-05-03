@@ -16,7 +16,7 @@ const Signup = () => {
         e.preventDefault();
         if(password !== confirmPassword) return toast.error("Password do not match!");
         try {
-            const {data} = await axios.post('/api/users/signup', {
+            const {data} = await axios.post(`${process.env.REACT_APP_API_URL}/api/users/signup`, {
                 name,
                 email,
                 password

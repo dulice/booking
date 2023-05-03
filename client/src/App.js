@@ -7,11 +7,17 @@ import RoomDetail from './pages/RoomDetail';
 import Signin from './pages/Signin';
 import Signup from './pages/Signup';
 import Profile from './pages/Profile';
+import Success from './pages/Success';
+import Payment from './pages/Payment';
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
 function App() {
+  const stripePromise  = loadStripe(process.env.REACT_APP_STRIPE_PUBLIC_KEY);
+
   return (
     <div>
-      <ToastContainer position="bottom-center" limit={1} />
+      <ToastContainer position="bottom-center" />
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/rooms' element={<Rooms />} />
@@ -19,6 +25,8 @@ function App() {
         <Route path='/signin' element={<Signin />} />
         <Route path='/signup' element={<Signup />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/success' element={ <Success/> } />
+        <Route path='/payment' element={ <Elements stripe={stripePromise}> <Payment/> </Elements>} />
         <Route path='/admin/createRoom' element={ <CreateRoom />} />
       </Routes>
     </div>
